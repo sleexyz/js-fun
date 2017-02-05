@@ -1,0 +1,15 @@
+{
+  "name": "js-fun",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "coffee-script": "^1.12.3",
+    "lodash": "^4.17.4",
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script/register"
+  }
+}
