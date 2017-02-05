@@ -13,7 +13,7 @@ const numToString = (x: number): string => {
 const id = (x) => x;
 
 // Long ass error message...
-const shouldNotTypeCheck = fun.compose(numToString, numToString);
+// const shouldNotTypeCheck = fun.compose(numToString, numToString);
 
 const compose = <A, B, C>(
     f: B => C, 
