@@ -62,3 +62,27 @@ class LazyBuilder<A> {
   }
 }
 (LazyBuilder: Class<BuilderLike<*>>);
+
+/*
+   Other builders:
+*/
+
+// Function Builder
+class Fun<B, C> {
+  f: B => C;
+  constructor(f: B => C) {
+    this.f = f;
+  }
+  static lift(f: B => C): Fun<B, C> {
+    return new Fun(f);
+  }
+  lower(): (B => C) {
+    return this.f;
+  }
+  lmap<A>(f: A => B): Fun<A, C> {
+    return Fun.lift((x) => this.f(f(x)));
+  }
+  rmap<D>(f: C => D): Fun<B, D> {
+    return Fun.lift((x) => f(this.f(x)));
+  }
+}
