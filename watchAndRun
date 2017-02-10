@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ls *.js | entr -cd sh -c "$@"
