@@ -24,6 +24,6 @@ const nonExhaustiveCheck = (x: Color): string => {
   } else if (x === 'blue') {
     return 'blue';
   }
-  // $FlowFixMe
+  // $ExpectError
   return impossible(x);
 }
