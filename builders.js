@@ -86,3 +86,30 @@ class Fun<B, C> {
     return Fun.lift((x) => f(this.f(x)));
   }
 }
+
+// ReducerBuilder
+
+type Reducer<S, A> = (S, A) => S;
+type ReducerMiddleware<S, A> = (next: Reducer<S, *>) => Reducer<S, * | A>;
+
+class ReducerBuilder<S, A> {
+  reducer: Reducer<S, A>;
+  constructor(reducer: (S, A) => S) {
+    this.reducer = reducer;
+  }
+  static init<S>(): ReducerBuilder<S, empty> {
+    return new ReducerBuilder((state, action) => {
+      // throw new Error('Not Handled');
+      console.error('Not Handled');
+      return state;
+    });
+  }
+  get(): Reducer<S, A> {
+    return this.reducer;
+  }
+  register <B>(middleware: ReducerMiddleware<S, B>): ReducerBuilder<S, A | B> {
+    const newReducer = middleware(this.reducer);
+    (newReducer: Reducer<S, A | B>);
+    return new ReducerBuilder(newReducer);
+  }
+};
